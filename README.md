@@ -1,167 +1,192 @@
 # Solar Power Prediction Model
 
-A machine learning project for predicting solar panel power generation using weather data and historical patterns.
+A comprehensive machine learning project for predicting both **solar power output (W)** and **energy generation (kWh)** using weather data and historical patterns.
 
-## 🎯 Project Overview
+## 🎯 Project Highlights
 
-This project develops a highly accurate machine learning model for predicting solar power generation with **99.8% accuracy (R² = 0.998)** using Random Forest algorithm.
+- **99.8% accuracy** for power prediction (Random Forest)
+- **99.57% accuracy** for energy generation prediction (Gradient Boosting)
+- **Production-ready models** with comprehensive testing framework
+- **AWS SageMaker optimized** with Jupyter notebooks
+- **Complete documentation** and deployment guides
 
-### Key Results
-- **Best Model**: Random Forest with RMSE of 119.16 W
-- **Dataset**: 60,030 samples from 60+ solar stations
-- **Features**: 28 engineered features including weather, time, and lag variables
-- **Time Period**: 3 years of hourly data (2021-2023)
+## ⚡ Energy vs Power Prediction
+
+### Power Prediction (W)
+- Predicts instantaneous power output
+- Best for real-time monitoring
+- RMSE: 119.16 W, R²: 0.998
+
+### Energy Generation Prediction (kWh) ⭐ **RECOMMENDED**
+- Predicts cumulative energy generation
+- Better for planning and forecasting
+- RMSE: 0.0499 kWh, R²: 0.9957
+- **Total Energy Error: 0.64%**
 
 ## 🚀 Quick Start on AWS SageMaker
 
-### 1. Clone Repository
+### Option 1: Complete Setup
 ```bash
-git clone https://github.com/YOUR_USERNAME/solar-power-prediction.git
+git clone https://github.com/Mololuwa1/solar-power-prediction.git
 cd solar-power-prediction
+python sagemaker_energy_setup.py --setup-type complete
 ```
 
-### 2. Launch SageMaker Notebook Instance
-1. Open AWS SageMaker Console
-2. Create new Notebook Instance (ml.t3.medium recommended)
-3. Upload this repository or clone directly in SageMaker
-
-### 3. Install Dependencies
+### Option 2: Energy Generation Only
 ```bash
-pip install -r requirements.txt
+python sagemaker_energy_setup.py --setup-type energy-only
 ```
 
-### 4. Run Notebooks
-Start with `notebooks/01_data_exploration.ipynb` and follow the sequence.
+### Option 3: Quick Demo
+```bash
+python sagemaker_energy_setup.py --setup-type quick
+```
+
+## 📓 Jupyter Notebooks (SageMaker Ready)
+
+| Notebook | Purpose | Key Features |
+|----------|---------|--------------|
+| `00_quick_start.ipynb` | Setup verification | Environment check, sample data |
+| `01_data_exploration.ipynb` | Data analysis | 124 files, 60+ stations analyzed |
+| `02_data_preprocessing.ipynb` | Feature engineering | 28 features, time series processing |
+| `03_model_training.ipynb` | Power prediction | Random Forest, 99.8% accuracy |
+| `04_model_evaluation.ipynb` | Model diagnostics | Performance analysis, visualizations |
+| `05_energy_generation_training.ipynb` | **Energy prediction** | **99.57% accuracy, production-ready** |
+| `06_energy_generation_testing.ipynb` | **Testing framework** | **Test on new datasets** |
+
+## 📊 Model Performance
+
+### Energy Generation Models (Recommended)
+| Model | RMSE (kWh) | R² | Total Energy Error |
+|-------|------------|----|--------------------|
+| **Gradient Boosting** | **0.0499** | **99.57%** | **0.64%** |
+| Random Forest | 0.0523 | 99.52% | 0.71% |
+| Ridge Regression | 0.1247 | 97.89% | 1.89% |
+| Linear Regression | 0.1389 | 96.45% | 2.15% |
+
+### Power Prediction Models
+| Model | RMSE (W) | R² | Performance |
+|-------|----------|----|-----------| 
+| **Random Forest** | **119.16** | **99.8%** | **Excellent** |
+| Gradient Boosting | 463.74 | 97.1% | Very Good |
+| Linear Regression | 1049.57 | 85.4% | Good |
+
+## 🎯 Use Cases
+
+### Energy Generation Prediction (Primary)
+- ✅ **Grid management and planning**
+- ✅ **Financial forecasting and revenue optimization**
+- ✅ **Energy storage optimization**
+- ✅ **Maintenance scheduling**
+- ✅ **Daily/weekly energy planning**
+
+### Power Prediction (Secondary)
+- ✅ **Real-time monitoring**
+- ✅ **Instantaneous load balancing**
+- ✅ **Performance diagnostics**
 
 ## 📁 Project Structure
 
 ```
 solar-power-prediction/
-├── notebooks/              # Jupyter notebooks for SageMaker
-│   ├── 01_data_exploration.ipynb
-│   ├── 02_data_preprocessing.ipynb
-│   ├── 03_model_training.ipynb
-│   └── 04_model_evaluation.ipynb
-├── src/                    # Source code modules
-│   ├── data_exploration.py
-│   ├── data_preprocessing_efficient.py
-│   ├── complete_models.py
-│   └── model_evaluation.py
-├── data/                   # Processed datasets
-│   ├── processed_solar_sample.csv
-│   ├── feature_info_sample.json
-│   └── model_results.csv
-├── models/                 # Trained models
-│   ├── model_random_forest.pkl
-│   ├── model_gradient_boosting.pkl
-│   └── scaler.pkl
-├── plots/                  # Generated visualizations
-├── docs/                   # Documentation
-│   ├── Solar_Power_Prediction_Report.md
-│   └── Project_Deliverables_Summary.md
-├── requirements.txt        # Python dependencies
-└── README.md              # This file
+├── 📓 notebooks/              # Jupyter notebooks for SageMaker
+│   ├── 00_quick_start.ipynb   # Setup verification
+│   ├── 05_energy_generation_training.ipynb  # Energy model training
+│   └── 06_energy_generation_testing.ipynb   # Testing framework
+├── 🐍 src/                    # Python source files
+├── 📊 data/                   # Datasets and sample data
+├── 🤖 models/                 # Power prediction models
+├── ⚡ energy_models/          # Energy generation models
+├── 📈 plots/                  # Visualizations
+├── 📚 docs/                   # Documentation
+├── ⚙️ sagemaker_energy_setup.py  # SageMaker setup script
+└── 📋 requirements.txt        # Dependencies
 ```
 
-## 🔧 Requirements
+## 🔧 Testing on New Datasets
 
-### Python Dependencies
-- pandas >= 1.5.0
-- numpy >= 1.21.0
-- scikit-learn >= 1.1.0
-- matplotlib >= 3.5.0
-- seaborn >= 0.11.0
-- scipy >= 1.9.0
-- joblib >= 1.1.0
-
-### AWS SageMaker Setup
-- Instance Type: ml.t3.medium or higher
-- Python 3.8+ kernel
-- Minimum 10GB storage
-
-## 📊 Model Performance
-
-| Model | RMSE | R² Score | MAE | Status |
-|-------|------|----------|-----|--------|
-| Random Forest | 119.16 | 0.998 | 33.28 | **RECOMMENDED** |
-| Gradient Boosting | 463.74 | 0.971 | 215.48 | Good alternative |
-| Linear Regression | 1049.57 | 0.854 | 546.32 | Baseline |
-
-## 🎯 Key Features
-
-### Top Predictive Features
-1. **Power_lag_1** (67.9%) - Previous hour power output
-2. **Irradiance** (17.6%) - Solar irradiance measurement  
-3. **Power_Density** (12.5%) - Power per unit irradiance
-4. **SolarElevation** (0.8%) - Solar elevation angle
-
-### Feature Categories
-- **Weather Features**: Temperature, Irradiance, Humidity, Wind, Rainfall
-- **Time Features**: Hour, Day, Month, Season, Solar position
-- **Lag Features**: Historical power patterns
-- **Engineered Features**: Power density, efficiency metrics
-
-## 🔄 Usage
-
-### For Prediction
+### Quick Testing
 ```python
-import joblib
-import pandas as pd
+# Test energy generation model
+python test_energy_generation.py --data_path "your_data.csv"
 
-# Load trained model
-model = joblib.load('models/model_random_forest.pkl')
-scaler = joblib.load('models/scaler.pkl')
-
-# Prepare your features (28 features required)
-# See feature_info_sample.json for feature list
-features_scaled = scaler.transform(your_features)
-
-# Make prediction
-prediction = model.predict(features_scaled)
+# Test all models
+python test_energy_generation.py --data_path "your_data.csv" --model_type all
 ```
 
-### For Training New Models
-Run the notebooks in sequence:
-1. Data Exploration
-2. Data Preprocessing  
-3. Model Training
-4. Model Evaluation
+### Required Data Format
+| Column | Description | Required |
+|--------|-------------|----------|
+| `Time` | Timestamp | ✅ |
+| `generation(kWh)` | Energy generation | ✅ |
+| `Irradiance` | Solar irradiance (W/m²) | ✅ |
+| `Temperature` | Temperature (°C) | ✅ |
+| `RelativeHumidity` | Humidity (%) | ⚠️ |
+| `WindSpeed` | Wind speed (m/s) | ⚠️ |
 
-## 📈 Applications
+## 📈 Performance Interpretation
 
-- **Grid Management**: Real-time power generation forecasting
-- **Energy Trading**: Prediction intervals for risk assessment
-- **Maintenance Planning**: Performance monitoring and anomaly detection
-- **Capacity Planning**: Long-term infrastructure decisions
+| Total Energy Error | Assessment | Action |
+|-------------------|------------|--------|
+| < 5% | ✅ **Excellent** | Ready for production |
+| 5-10% | ⚠️ **Good** | Monitor performance |
+| 10-20% | ⚠️ **Acceptable** | Consider retraining |
+| > 20% | ❌ **Poor** | Retraining required |
+
+## 🌟 Key Features
+
+- **Dual Prediction Models**: Both power (W) and energy (kWh) prediction
+- **Time Series Features**: Lag features, rolling statistics, seasonal patterns
+- **Weather Integration**: Comprehensive weather data processing
+- **Production Ready**: Saved models with preprocessing pipelines
+- **Comprehensive Testing**: Framework for validating on new datasets
+- **SageMaker Optimized**: Native Jupyter notebook support
+- **Automated Setup**: One-command environment setup
+- **Cost Optimized**: Includes cost management best practices
 
 ## 📚 Documentation
 
-- [Complete Project Report](docs/Solar_Power_Prediction_Report.md)
-- [Deliverables Summary](docs/Project_Deliverables_Summary.md)
-- [Model Performance Analysis](plots/)
+- **[Quick Start Guide](docs/Quick_Start_Guide.md)** - Get running in 15 minutes
+- **[AWS SageMaker Deployment Guide](docs/AWS_SageMaker_Deployment_Guide.md)** - Complete setup instructions
+- **[Energy Generation Prediction Guide](Energy_Generation_Prediction_Guide.md)** - Detailed energy modeling guide
+- **[Testing New Datasets Guide](Testing_New_Datasets_Guide.md)** - How to test on your data
+
+## 🚀 Deployment Options
+
+### AWS SageMaker (Recommended)
+- Native Jupyter notebook support
+- Scalable compute instances
+- Integrated with AWS ecosystem
+- Cost-effective with auto-shutdown
+
+### Local Development
+```bash
+pip install -r requirements.txt
+jupyter notebook notebooks/00_quick_start.ipynb
+```
+
+### Google Colab
+Upload notebooks to Colab and run with GPU acceleration.
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create feature branch (`git checkout -b feature/improvement`)
-3. Commit changes (`git commit -am 'Add improvement'`)
-4. Push to branch (`git push origin feature/improvement`)
-5. Create Pull Request
+2. Create a feature branch
+3. Make your changes
+4. Add tests for new functionality
+5. Submit a pull request
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙋‍♂️ Support
+## 🙏 Acknowledgments
 
-For questions or issues:
-1. Check the documentation in `docs/`
-2. Review the Jupyter notebooks for examples
-3. Open an issue on GitHub
+- Solar panel data from multiple stations and weather sources
+- Built with scikit-learn, pandas, and matplotlib
+- Optimized for AWS SageMaker deployment
 
 ---
 
-**Ready for Production Deployment** ✅
-
-Built with ❤️ for renewable energy forecasting
+**🌞 Ready to predict solar energy generation with 99.57% accuracy!**
 
